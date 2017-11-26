@@ -1,6 +1,6 @@
 package kadai23;
 
-public class DayService {
+public class DayService implements Service {
 
 	private boolean joined = false;
 	int START_TIME = 8;

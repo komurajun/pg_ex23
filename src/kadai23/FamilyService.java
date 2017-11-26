@@ -1,6 +1,6 @@
 package kadai23;
 
-public class FamilyService {
+public class FamilyService implements Service{
 
 	private boolean joined = false;
 	int TEL_NUMBER = 2;
