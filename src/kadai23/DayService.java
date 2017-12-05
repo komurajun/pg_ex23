@@ -1,64 +1,24 @@
 package kadai23;
 
-public class DayService implements Service {
+public class DayService extends TimeService {
+	private static final int START_TIME = 8;
+	private static final int END_TIME = 17;
 
-	private boolean joined = false;
-	int START_TIME = 8;
-	int END_TIME = 17;
-	String SERVICE_CODE = "E1";
-	int BASIC_CHARGE = 200;
+	// 料金計算のための基礎情報
+	private static final String SERVICE_CODE = "E1";
+	private static final int BASIC_CHARGE = 200;
 
-	// サービスに加入しているかをチェック
-	public void checkService(Record record) {
-		if (record.getServiceCode().equals(SERVICE_CODE)) {
-			joined = true;
-		}
-	}
-
-	public int calcBasicCharge(int initialBasicCharge) {
-		if (joined) {
-			// サービスに加入していれば基本料金を200円増し
-			return initialBasicCharge + getBasicCharge();
-		}
-		return initialBasicCharge;
-	}
-
-	// 単価を計算する
-	public int calcUnitPrice(Record record, int initialCallUnitPrice) {
-
-		if (!isJoind()) {
-			// サービスに加入していなければ値引きなし
-			return initialCallUnitPrice;
-		}
-
-		if (isServiceTime(record.getStartHour())) {
-			// 通話開始時間がサービス対象時間ならば5円引き
-			return initialCallUnitPrice - getDiscount();
-		}
-
-		return initialCallUnitPrice;
-	}
-
-	public void clear() {
-		joined = false;
-	}
-
-	public void joind() {
-		joined = true;
-	}
-
-	public boolean isJoind() {
-		return joined;
-	}
-
+	// 昼トク割引対象時間かどうかを判定する
 	public boolean isServiceTime(int hour) {
-		if (START_TIME <= hour && hour <= END_TIME){
-			return true;
+		if (isJoined()) {
+			if((hour >= START_TIME) && (hour <= END_TIME)){
+				return true;
+			}
 		}
-			return false;
+		return false;
 	}
 
-	public String getServiceCord() {
+	public String getServiceCode() {
 		return SERVICE_CODE;
 	}
 

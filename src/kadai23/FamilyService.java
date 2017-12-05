@@ -43,6 +43,7 @@ public class FamilyService implements Service{
 
 	public void clear() {
 		joined = false;
+		telNumberCount = 0;
 	}
 
 	public void joind() {
